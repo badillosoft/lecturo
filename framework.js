@@ -1,3 +1,8 @@
+/**
+ * framework.js - Simple Javascript Framework
+ * Alan Badillo Salas (C) 2020 (badillo.soft@hotmai.com)
+ */
+
 async function requestText(url) {
     const response = await fetch(url);
     
