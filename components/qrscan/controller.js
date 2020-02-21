@@ -67,12 +67,12 @@ return async container => {
             if (deviceId) options.deviceId = { exact: deviceId };
 
             stream = await navigator.mediaDevices.getUserMedia(options);
+
+            video.srcObject = stream;
+            video.play();
         } catch (error) {
             console.warn(error);
         }
-
-        video.srcObject = stream;
-        video.play();
     }
 
     await setStream();
@@ -94,7 +94,7 @@ return async container => {
     devicesSelector.bind.change = async () => {
         video.pause();
         devicesSelector.disabled = true;
-        console.log(devicesSelector.value);
+        alert(devicesSelector.value);
         await setStream(devicesSelector.value);
         devicesSelector.disabled = false;
     };
