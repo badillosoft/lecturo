@@ -64,7 +64,7 @@ return async container => {
 
         console.log(videoDevices);
 
-        stream = await navigator.mediaDevices.getUserMedia({ video: true, exact: videoDevices[videoDevices.length - 1].deviceId });
+        stream = await navigator.mediaDevices.getUserMedia({ video: true, exact: videoDevices[0].deviceId });
     } catch (error) {
         console.warn(error);
     }
