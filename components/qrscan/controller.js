@@ -92,6 +92,7 @@ return async container => {
     }
 
     devicesSelector.bind.change = async () => {
+        video.pause();
         devicesSelector.disabled = true;
         console.log(devicesSelector.value);
         await setStream(devicesSelector.value);
