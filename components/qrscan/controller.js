@@ -56,19 +56,45 @@ return async container => {
         }, 1000);
     });
 
-    let stream = null;
+    const { devicesSelector } = container.ref.id;
+
+    async function setStream(deviceId) {
+        let stream = null;
+
+        try {
+            const options = { video: true };
+
+            if (deviceId) options.deviceId = { exact: deviceId };
+
+            stream = await navigator.mediaDevices.getUserMedia(options);
+        } catch (error) {
+            console.warn(error);
+        }
+
+        video.srcObject = stream;
+        video.play();
+    }
+
+    await setStream();
 
     try {
         const devices = await navigator.mediaDevices.enumerateDevices();
         const videoDevices = devices.filter(device => device.kind === 'videoinput');
 
-        console.log(videoDevices);
-
-        stream = await navigator.mediaDevices.getUserMedia({ video: true, exact: videoDevices[0].deviceId });
+        for (let device of videoDevices) {
+            let option = document.createElement("option");
+            option.value = device.deviceId;
+            option.textContent = device.label;
+            devicesSelector.append(option);
+        }
     } catch (error) {
         console.warn(error);
     }
 
-    video.srcObject = stream;
-    video.play();
+    devicesSelector.bind.change = async () => {
+        devicesSelector.disabled = true;
+        console.log(devicesSelector.value);
+        await setStream(devicesSelector.value);
+        devicesSelector.disabled = false;
+    };
 };
