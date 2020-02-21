@@ -1,5 +1,5 @@
 return async container => {
-    while(!QRCode) await new Promise(resolve => setTimeout(resolve, 100));
+    while (!QRCode) await new Promise(resolve => setTimeout(resolve, 100));
 
     const video = container.querySelector("video");
     const canvas = document.createElement("canvas");
@@ -59,7 +59,12 @@ return async container => {
     let stream = null;
 
     try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+        console.log(videoDevices);
+
+        stream = await navigator.mediaDevices.getUserMedia({ video: true, exact: videoDevices[videoDevices.length - 1].deviceId });
     } catch (error) {
         console.warn(error);
     }
