@@ -58,6 +58,14 @@ return async container => {
 
     const { devicesSelector } = container.ref.id;
 
+    devicesSelector.bind.change = async () => {
+        video.pause();
+        devicesSelector.disabled = true;
+        alert(devicesSelector.value || "Por defecto");
+        await setStream(devicesSelector.value);
+        devicesSelector.disabled = false;
+    };
+
     async function setStream(deviceId) {
         let stream = null;
 
@@ -81,21 +89,13 @@ return async container => {
         const devices = await navigator.mediaDevices.enumerateDevices();
         const videoDevices = devices.filter(device => device.kind === 'videoinput');
 
-        for (let device of videoDevices) {
+        for (let device of [{}, ...videoDevices]) {
             let option = document.createElement("option");
             option.value = device.deviceId;
-            option.textContent = device.label;
+            option.textContent = device.label || "Por defecto";
             devicesSelector.append(option);
         }
     } catch (error) {
         console.warn(error);
     }
-
-    devicesSelector.bind.change = async () => {
-        video.pause();
-        devicesSelector.disabled = true;
-        alert(devicesSelector.value);
-        await setStream(devicesSelector.value);
-        devicesSelector.disabled = false;
-    };
 };
