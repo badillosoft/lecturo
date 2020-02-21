@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello lambda.js</title>
+</head>
+<body>
+    
+    <script src="framework.js"></script>
+
+    <input type="file">
+
+    <script>
+        const inputFile = document.querySelector("input");
+
+        (async () => {
+            const helloApi = await loadApi("hello");
+
+            inputFile.addEventListener("change", async () => {
+                const result = await helloApi(inputFile.files);
+                console.log(result);
+            });
+        })();
+    </script>
+
+</body>
+</html>

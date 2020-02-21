@@ -1,0 +1,45 @@
+<div class="logo">
+    <span>C</span>
+    <span>o</span>
+    <span>D</span>
+    <span>i</span>
+    <span></span>
+    <span>G</span>
+    <span>o</span>
+</div>
+
+<style>
+    .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 6px;
+        margin-bottom: 6px;
+        border-bottom: 1px solid whitesmoke;
+        height: 34px;
+        width: 200px;
+        transition: width 1s;
+    }
+
+    .logo.login {
+        position: absolute;
+        left: 0px;
+        top: 6px;
+        width: 100%;
+    }
+
+    .logo>span {
+        font-size: 24px;
+        color: #003B70;
+        margin-right: 2px;
+    }
+
+    .logo>span:nth-last-of-type(2) {
+        color: red;
+        margin-left: 6px;
+    }
+
+    .logo>span:nth-last-of-type(1) {
+        color: red;
+    }
+</style>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test 2 lambda.js</title>
+</head>
+<body>
+    
+    <script src="http://72.167.226.124:7000/lambda.js"></script>
+
+    <script>
+        
+        (async () => {
+            const tunnel = await lambda("http://72.167.226.124:6001");
+            const result = await tunnel({
+                "key": "e15da282-cb13-4a5c-a2e5-eb02c022356ex",
+                "token": "f17fed2a-e409-4e49-8418-17eab7b10243x",
+                lambda: (input => {
+                    return "Hello test 2";
+                }).toString()
+            });
+            console.log(result);
+        })();
+    </script>
+
+</body>
+</html>

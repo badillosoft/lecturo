@@ -1,0 +1,236 @@
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+    }
+
+    main {
+        width: 100%;
+        height: 100%;
+        /* overflow: hidden; */
+        overflow: auto;
+        /* background: tomato; */
+    }
+
+    .titulo {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        position: absolute;
+        top: 6px;
+        height: 36px;
+        /* background-color: teal; */
+    }
+
+    .titulo span {
+        display: flex;
+        align-items: center;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "AppleColor Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        /* border-bottom: 1px solid #cccccc; */
+        /* color: blue; */
+        padding-bottom: 5px;
+        margin-left: 20px;
+        font-size: 16px;
+        color: #003B70;
+    }
+
+    .div-logo-scan {
+        margin-top: 20px;
+        /* background-color: blueviolet; */
+    }
+
+    .info-emparejar {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        /* background-color: darkcyan; */
+        padding-bottom: 24px;
+    }
+
+    .monto {
+        text-align: center;
+        color: #777777;
+        font-size: 14px;
+    }
+
+    .info-emparejar input {
+        width: 100%;
+        text-align: right;
+        outline-style: none;
+        border: 0px solid transparent;
+        padding: 0px 6px;
+        font-size: 24px;
+        letter-spacing: 2px;
+    }
+
+    .info-emparejar input:focus {
+        border-bottom: 1px solid var(--gray);
+    }
+
+    .qr {
+        width: 80px;
+    }
+
+    .div-logo-scan {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 240px;
+    }
+
+    .div-logo-scan>svg {
+        position: absolute;
+        z-index: 1;
+    }
+
+    .scanner {
+        position: relative;
+        top: 0px;
+        width: 240px;
+        height: 240px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 12px;
+    }
+
+    .scanner>div {
+        width: 100%;
+        height: 100%;
+        /* background-color: red; */
+    }
+
+    .qr-target img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .btn {
+        border-radius: 8px;
+    }
+
+    .blockquote-custom {
+        position: relative;
+        font-size: 1.1rem;
+    }
+
+    .blockquote-custom-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: -25px;
+        left: 50px;
+    }
+</style>
+
+<main class="pt-5">
+    <div class="container-fluid titulo">
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="ml-2">
+                    <i class="fas fa-book-open mr-2"></i>
+                    Campaña por la lectura @ 2020 | José Raquel Badillo Medécigo
+                </span>
+
+            </div>
+        </div>
+    </div>
+
+    <audio data-id="audio" src="audios/principito.m4a"></audio>
+
+    <div data-id="qrScannerMain" class="logo-scan mb-3 mt-5" hidden>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="div-logo-scan">
+                    <svg viewBox="0 0 100 100" width="240px">
+                        <path d="M25,2 L2,2 L2,25" fill="none" stroke="var(--primary)" stroke-width="1" />
+                        <path d="M2,75 L2,98 L25,98" fill="none" stroke="var(--primary)" stroke-width="1" />
+                        <path d="M75,98 L98,98 L98,75" fill="none" stroke="var(--primary)" stroke-width="1" />
+                        <path d="M98,25 L98,2 L75,2" fill="none" stroke="var(--primary)" stroke-width="1" />
+                    </svg>
+                    <div data-id="qrScannerContainer" class="scanner">
+                        <i class="fas fa-cog fa-spin fa-2x" style="color: var(--primary)"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-id="qrScannerInfo" class="info-emparejar" hidden>
+        <div class="d-flex justify-content-between align-items-center" style="width: 240px;">
+            <div data-id="qrTarget" class="qr-target">
+                <img class="qr" src="https://www.qrcode-monkey.com/img/default-preview-qr.svg" alt="">
+            </div>
+            <div class="text-right mr-2 w-100 pl-2">
+                <div data-id="qrInfoStatus" class="m-2 pay-text" style="color: #003B70;">
+                    Escaneando... <i class="fas fa-spinner fa-spin ml-2"></i>
+                </div>
+                <span></span>
+            </div>
+            <!-- <div class="text-right mr-2 w-100">
+                <div class="m-2 pay-text" style="color: #003B70;">$ 0.00</div>
+                <button type="button" class="btn btn-primary pay-button" disabled>
+                    <i class="fas fa-dollar-sign mr-1"></i>
+                    Pagar
+                </button>
+            </div> -->
+        </div>
+    </div>
+
+    <section data-id="quoteContainer" class="py-5" hidden>
+        <div class="container pt-5">
+            <!-- <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <header class="text-center pb-5">
+                        <h1 class="h2">Bootstrap custom quote</h1>
+                        <p>Build a nicely styled quote in Bootstrap 4.<br>Bootstrap snippet by <a
+                                href="https://bootstrapious.com/snippets"
+                                class="font-italic text-info">Bootstrapious</a></p>
+                    </header>
+                </div>
+            </div> -->
+
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+
+                    <blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+                        <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                class="fa fa-quote-left text-white"></i></div>
+                        <p data-id="quoteText" class="mb-0 mt-2 font-italic">"La música es una de las cosas que puede
+                            salvar al mundo,
+                            porque un hombre que busca y encuentra y se solaza horas y días y años y años luz, a través
+                            de generaciones, con la belleza, ¿qué otra cosa puede querer que un mundo mejor?"</p>
+                        <footer class="blockquote-footer pt-4 mt-4 border-top">
+                            <cite data-id="quoteAutor" title="Source Title">Atahualpa Yupanqui</cite>
+                        </footer>
+                    </blockquote>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div data-id="jumbotron" class="container mt-5">
+        <div class="jumbotron py-3">
+            <h1 class="display-4">Bienvenido lector</h1>
+            <p class="lead">Gracias por ser parte de la lectura, deseamos que descubras cientos de textos y audios
+                sorprendentes y que te llenes de tanto conocimiento y cultura.
+            </p>
+            <hr class="my-2">
+            <p>Vamos a comenzar por escanear el código QR que viene en tu libro de texto o puedes usar cualquier otro
+                código.</p>
+            <button data-id="startButton" class="btn btn-primary btn-lg">Comenzar</button>
+        </div>
+    </div>
+</main>
+
+<script src="lib/wikiQuote.js"></script>
